@@ -1,0 +1,37 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "command": "bash",
+    "isShellCommand": true,
+    "showOutput": "always",
+    "args": ["-c"],
+    "tasks": [
+        {
+            "taskName": "delete",
+            "suppressTaskName": true,
+            "args": ["rm ${fileBasenameNoExtension}"]
+        },
+        {
+            "taskName": "delete all",
+            "suppressTaskName": true,
+            "args": ["rm build -fr"]
+        },
+        {
+            "taskName": "build",
+            "suppressTaskName": true,
+            "args": ["cc -o build/${fileBasenameNoExtension} ${fileBasename} || mkdir build && cc -o build/${fileBasenameNoExtension} ${fileBasename}"],
+            "isBuildCommand": true
+        },
+        {
+            "taskName": "generate assembly code in intel syntax",
+            "suppressTaskName": true,
+            "args": ["cc -c -S masm=intel ${fileBasename}"]
+        },
+        {
+            "taskName": "run",
+            "suppressTaskName": true,
+            "args": ["./build/${fileBasenameNoExtension}"]
+        }
+    ]
+}
