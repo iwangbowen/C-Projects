@@ -3,6 +3,7 @@
 gcc -c -S masm=intel test.c
 char a[] = "abcdefg";
 char *b = "abcdefg";
+
 数组名a是一个指针常量，b是一个指针变量，程序会在栈上为b分配存储空间，但不会为a分配存储空间。
 
 实际上，C代码翻译成汇编代码后，函数内的局部变量名都会被[EBP - 相应偏移量]替换。
